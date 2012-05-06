@@ -24,7 +24,7 @@ module Mongoid
       # Build a model class
       def build name, options, force
         # Parent class
-        @parent_model = options.extends? ? options.extends.constantize : Object
+        parent_model = options.extends? ? options.extends.constantize : Object
 
         # Handle existing classes
         if Object.const_defined? name
@@ -33,7 +33,7 @@ module Mongoid
         end
 
         # Create model class
-        @model = Object.const_set name, Class.new(@parent_model)
+        @model = Object.const_set name, Class.new(parent_model)
 
         # Include Mongoid::Document by default
         includes = ['Mongoid::Document']
@@ -67,11 +67,11 @@ module Mongoid
       # Handle model fields
       def add_fields fields
         fields.each do |field, options|
+          field = field.to_s
+
           # Retrieve parent field options if not overloaded
-          puts field
-          puts @parent_model.fields.key?(field) if @parent_model.methods.include?(:fields)
-          if @parent_model.methods.include?(:fields) && @parent_model.fields.has_key?(field)
-            parent_field = @parent_model.fields[field]
+          if @model.superclass.respond_to?('fields') && @model.superclass.fields.has_key?(field)
+            parent_field = @model.superclass.fields[field]
             options.type = parent_field.type unless options.type?
             options._default = parent_field.default_val unless options._default?
           end
