@@ -14,7 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "mongoid_model_builder"
   gem.require_paths = ["lib"]
   gem.version       = Mongoid::ModelBuilder::VERSION
-  
-  gem.add_runtime_dependency('hashery', '1.5.0')
+
   gem.add_runtime_dependency('mongoid', '~> 2.4')
 end
