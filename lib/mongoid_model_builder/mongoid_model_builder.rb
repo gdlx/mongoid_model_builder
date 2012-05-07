@@ -1,7 +1,7 @@
 module Mongoid
   module ModelBuilder
     class << self
-      # Load models definitions from Ruby configuration file.
+      # Load models definitions from Ruby configuration Array or file.
       def load models, options = {}
 
         # Try to read file if a String is provided
@@ -59,7 +59,7 @@ module Mongoid
         @code << source
       end
 
-      # Handle class includes
+      # Adds class includes to current model class
       def add_includes includes
         a = []
         includes.uniq.each do |value|
@@ -68,7 +68,7 @@ module Mongoid
         model_append a
       end
 
-      # Handle model fields
+      # Adds fields to current model class
       def add_fields fields
         raise "Fields list must be an Array (#{fields.class} provided)" unless fields.is_a? Array
 
@@ -76,7 +76,8 @@ module Mongoid
           add_field field
         end
       end
-
+      
+      # Add field to current model class
       def add_field field
         raise "Field must be a Hash (#{field.class} provided)" unless field.is_a? Hash
 
@@ -98,7 +99,7 @@ module Mongoid
         add_validators field
       end
 
-      # Handle model validators
+      # Add validators to model class
       def add_validators field
         return unless field[:validators]
         raise "Field validators list must be a Hash (#{field[:validators].class} provided)" unless field[:validators].is_a? Hash
