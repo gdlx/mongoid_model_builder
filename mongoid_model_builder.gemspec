@@ -4,8 +4,8 @@ require File.expand_path('../lib/mongoid_model_builder/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Gauthier Delacroix"]
   gem.email         = ["gauthier.delacroix@gmail.com"]
-  gem.description   = "%q{mongoid_model_builder dynamically creates Mongoid model classes following configuration hash specifications}"
-  gem.summary       = "%q{Dynamic Mongoid model classes generator}"
+  gem.description   = %q{mongoid_model_builder dynamically creates Mongoid model classes following configuration hash specifications}
+  gem.summary       = %q{Dynamic Mongoid model classes generator}
   gem.homepage      = "https://github.com/porecreat/mongoid_model_builder"
 
   gem.files         = `git ls-files`.split($\)
